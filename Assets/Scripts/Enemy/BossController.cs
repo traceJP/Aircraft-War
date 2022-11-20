@@ -13,15 +13,19 @@ namespace Enemy
 
         public List<GameObject> bulletPrefabs;
 
-
+        private bool _allowShoot;
         
-        private void Start()
-        {
-            InvokeRepeating(nameof(Shoot), 0, shootRate);
-        }
-
+        
+        private float _timer;
         private void FixedUpdate()
         {
+            _timer += Time.fixedDeltaTime;
+            if (_allowShoot && _timer > shootRate)
+            {
+                _timer = 0;
+                Shoot();
+            }
+            
             Move();
         }
 
@@ -33,9 +37,7 @@ namespace Enemy
             }
             else
             {
-                
-                // TODO：这里准备好了可以开始发射子弹了
-                
+                _allowShoot = true;
                 if (transform.position.x < Map2DRange.LeftRange + 1.3 || transform.position.x > Map2DRange.RightRange - 1.3)
                 {
                     speed *= -1;
@@ -44,22 +46,14 @@ namespace Enemy
             }
         }
         
-        
-        
         private void Shoot()
         {
-            var index = 0;
-            foreach (Transform pos in transform)
+            for (var i = 0; i < bulletPrefabs.Count; i++)
             {
-                var bullet = Instantiate(bulletPrefabs[index++]);
-                bullet.transform.position = pos.position;
+                Instantiate(bulletPrefabs[i])
+                    .transform.position = transform.GetChild(i).position;
             }
         }
-        
-        
-        
-        
-        
         
     }
 }

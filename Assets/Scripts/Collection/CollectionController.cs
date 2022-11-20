@@ -1,5 +1,4 @@
-﻿using System;
-using Room;
+﻿using Room;
 using UnityEngine;
 
 namespace Collection

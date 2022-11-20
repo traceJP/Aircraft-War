@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Enemy;
 using Room;
 using UI;
 using UnityEngine;
@@ -71,6 +71,7 @@ namespace Bullet
         {
             if (other.tag.Contains(RoomTag.Enemy))
             {
+                VFXManager.Instance.CreateVFX(other.transform.position, "explosion_enemy");
                 Score.Instance.UpdateScore(100);
                 Destroy(gameObject);
                 Destroy(other.gameObject);
@@ -78,14 +79,13 @@ namespace Bullet
 
             if (other.tag.Contains(RoomTag.Boss))
             {
-                
-                // TODO: boss扣血
-                
+                BossHealth.Instance.UpdateHp(-10);
                 Destroy(gameObject);
             }
                 
             if (other.tag.Contains(RoomTag.Bullet) && other.GetComponent<BulletController>().bulletType == BulletType.Enemy)
             {
+                VFXManager.Instance.CreateVFX(transform.position, "explosion_asteroid");
                 Score.Instance.UpdateScore(10);
                 Destroy(gameObject);
                 Destroy(other.gameObject);
@@ -96,7 +96,6 @@ namespace Bullet
         {
             if (other.tag.Contains(RoomTag.Player))
             {
-                // 减血量
                 PlayerHealth.Instance.UpdateHp(-10);
                 Destroy(gameObject);
             }

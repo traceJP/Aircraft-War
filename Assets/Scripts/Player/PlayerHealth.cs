@@ -11,9 +11,8 @@ public class PlayerHealth : Singleton<PlayerHealth>
 
     [SerializeField]
     private float minHp = 0;
-
-    [SerializeField]
-    private float currentHp;
+    
+    private float _currentHp;
 
     [SerializeField]
     private Slider slider;
@@ -24,7 +23,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
     protected override void Awake()
     {
         base.Awake();
-        currentHp = slider.value = maxHp;
+        _currentHp = slider.value = maxHp;
         slider.maxValue = maxHp;
         slider.minValue = minHp;
     }
@@ -41,24 +40,26 @@ public class PlayerHealth : Singleton<PlayerHealth>
 
     public void UpdateHp(int value)
     {
-        if (currentHp - value <= minHp)
+        VFXManager.Instance.CreateVFXRange(transform.position);
+        if (_currentHp - value <= minHp)
         {
+            VFXManager.Instance.CreateVFX(transform.position, "explosion_player");
             DeathEvent?.Invoke();
             Destroy(gameObject);
         }
-        currentHp += value;
+        _currentHp += value;
     }
     
     private void ShowHpBySlider()
     {
-        slider.value = currentHp;
+        slider.value = _currentHp;
     }
     
     private void KaiGua()
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            currentHp = maxHp;
+            _currentHp = maxHp;
         }
     }
 
