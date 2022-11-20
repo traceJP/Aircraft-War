@@ -54,6 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8120734406574925286}
+  - component: {fileID: 3284099319932872681}
   m_Layer: 0
   m_Name: AduioManager
   m_TagString: Untagged
@@ -76,3 +77,24 @@ Transform:
   m_Father: {fileID: 3284099319725691119}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3284099319932872681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8308498655696648048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a599fd59507b4dfbb78ca09396c39f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundList:
+  - {fileID: 8300000, guid: 20fac7f5e7bee024fb4ecb860436c09c, type: 3}
+  - {fileID: 8300000, guid: 447c58b5cd3428440bf2b5baeda1a123, type: 3}
+  - {fileID: 8300000, guid: 70d889485ac0f8c44aec748f41eed93b, type: 3}
+  - {fileID: 8300000, guid: afd0a71a38de2f24d970a1e3e3e3ce45, type: 3}
+  - {fileID: 8300000, guid: 7fdef15748817464c83277e1ec125025, type: 3}
+  bgmList:
+  - {fileID: 8300000, guid: 2ae5cf8e31fd16146b48fe503969483a, type: 3}
+  - {fileID: 8300000, guid: e0189aa91d4389945915ecf11dd82aa8, type: 3}
