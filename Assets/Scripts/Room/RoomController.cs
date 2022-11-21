@@ -4,8 +4,19 @@ using Utils;
 
 namespace Room
 {
+
+    [System.Flags]
+    public enum Level : short
+    {
+        Easy,
+        Normal,
+        Hard,
+    }
+    
     public class RoomController : Singleton<RoomController>
     {
+
+        public static Level Level = Level.Easy;
 
         public float createEnemyRate;
 
@@ -22,12 +33,35 @@ namespace Room
         [HideInInspector]
         public bool hasBoss;
 
+        [HideInInspector]
+        public int createBossCount;
+
         private bool _isStopAll;
 
         protected override void Awake()
         {
             base.Awake();
             PlayerHealth.Instance.DeathEvent += () => _isStopAll = true;
+            InitLevel(Level);
+        }
+
+        private void InitLevel(Level level)
+        {
+            switch (level)
+            {
+                case Level.Easy:
+                    break;
+                case Level.Normal:
+                    createEnemyRate -= 0.1f;
+                    createCollectionRate += 0.5f;
+                    createBossRate -= 2f;
+                    break;
+                case Level.Hard:
+                    createEnemyRate -= 0.25f;
+                    createCollectionRate += 1f;
+                    createBossRate -= 5f;
+                    break;
+            }
         }
 
         private float _timerEnemy;
@@ -60,8 +94,9 @@ namespace Room
                 if (_timeBoss > createBossRate)
                 {
                     _timeBoss = 0;
-                    CreateBoss();
+                    createBossCount++;
                     hasBoss = true;
+                    CreateBoss();
                 }
             }
 

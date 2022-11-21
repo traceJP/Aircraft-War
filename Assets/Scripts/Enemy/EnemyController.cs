@@ -17,6 +17,16 @@ namespace Enemy
         {
             InvokeRepeating(nameof(Shoot), 0, shootRate);
         }
+        
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag.Contains(RoomTag.Player))
+            {
+                PlayerHealth.Instance.UpdateHp(-20);
+                AudioManager.Instance.PlaySound("xiaobaozai");
+                Destroy(gameObject);
+            }
+        }
 
         private void FixedUpdate()
         {

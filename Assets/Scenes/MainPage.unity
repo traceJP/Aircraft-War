@@ -965,7 +965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6080732, g: 0.9433962, b: 0.4761481, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1073,7 +1073,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 386203473}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 616973204}
+        m_TargetAssemblyTypeName: UI.Setting, Assembly-CSharp
+        m_MethodName: MusicNextButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &386203473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1968,7 +1980,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe59fb13ac8fbb54fb03be9289c6470c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 0}
+  volumeToggle: {fileID: 1186763400}
+  volumeSlider: {fileID: 776810380}
+  bgmTitle: {fileID: 145297904}
 --- !u!1 &627679828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,11 +2292,23 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1348974120}
   toggleTransition: 1
   graphic: {fileID: 1139234749}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 2105022180}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
-  m_IsOn: 1
+      m_Calls:
+      - m_Target: {fileID: 616973204}
+        m_TargetAssemblyTypeName: UI.Setting, Assembly-CSharp
+        m_MethodName: LevelChangeToggle
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 0
 --- !u!1 &656267863
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,19 +2916,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &908269315
 GameObject:
   m_ObjectHideFlags: 0
@@ -3876,20 +3890,8 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 616973204}
-        m_TargetAssemblyTypeName: UI.Setting, Assembly-CSharp
-        m_MethodName: VolumeToggle
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  m_IsOn: 1
+      m_Calls: []
+  m_IsOn: 0
 --- !u!1 &1197289494
 GameObject:
   m_ObjectHideFlags: 0
@@ -3973,7 +3975,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1197289497}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 616973204}
+        m_TargetAssemblyTypeName: UI.Setting, Assembly-CSharp
+        m_MethodName: MusicLastButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1197289497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5552,7 +5566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1637303517
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6083,11 +6097,23 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 908269317}
   toggleTransition: 1
   graphic: {fileID: 1528319170}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 2105022180}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
-  m_IsOn: 1
+      m_Calls:
+      - m_Target: {fileID: 616973204}
+        m_TargetAssemblyTypeName: UI.Setting, Assembly-CSharp
+        m_MethodName: LevelChangeToggle
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 0
 --- !u!1 &1766227745
 GameObject:
   m_ObjectHideFlags: 0
@@ -6510,10 +6536,22 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 767917309}
   toggleTransition: 1
   graphic: {fileID: 1766227747}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 2105022180}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 616973204}
+        m_TargetAssemblyTypeName: UI.Setting, Assembly-CSharp
+        m_MethodName: LevelChangeToggle
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &2043213527
 GameObject:
@@ -6831,6 +6869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2105022179}
+  - component: {fileID: 2105022180}
   m_Layer: 5
   m_Name: PlayMode
   m_TagString: Untagged
@@ -6862,6 +6901,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -323}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2105022180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105022178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fafe2cfe61f6974895a912c3755e8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AllowSwitchOff: 0
 --- !u!1 &2112632203
 GameObject:
   m_ObjectHideFlags: 0

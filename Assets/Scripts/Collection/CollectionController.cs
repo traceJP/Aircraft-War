@@ -20,6 +20,11 @@ namespace Collection
             if (other.tag.Contains(RoomTag.Player))
             {
                 other.GetComponent<Player>().ChangePos(posIndex);
+                AudioManager.Instance.PlaySound("shiqu");
+                if (posIndex == 2)
+                {
+                    AudioManager.Instance.PlaySound("effcet_vo_tiyanzhandouliba");
+                }
                 Destroy(gameObject);
             }
         }

@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
             Instantiate(bulletPrefab)
                 .transform.position = transform.GetChild(pos).position;
         }
+        AudioManager.Instance.PlaySound("beiji");
     }
 
     public void ChangePos(int index)

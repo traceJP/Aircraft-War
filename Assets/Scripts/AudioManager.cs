@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utils;
 
@@ -13,14 +14,17 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField]
     private List<AudioClip> bgmList;
     private Dictionary<string, AudioClip> _allBGMClips;
+    
+    public int BGMCount => _allBGMClips.Count;
+    public int SoundCount => _allSoundClips.Count;
 
-    private float _bgmVolume;
-    private float _soundVolume;
+    public float BGMVolume { get; private set; }
+    public float SoundVolume { get; private set; }
 
     // 音效AudioSource缓存池
     private SourceCache _sourceCache;
     // 音效正在播放列表
-    private Dictionary<string, AudioSource> _playingList;
+    private List<AudioSource> _playingList;
     // 背景音乐AudioSource
     private AudioSource _bgmSource;
     
@@ -29,9 +33,10 @@ public class AudioManager : Singleton<AudioManager>
     {
         base.Awake();
         _sourceCache = new SourceCache(gameObject);
-        _playingList = new Dictionary<string, AudioSource>();
+        _playingList = new List<AudioSource>();
         _bgmSource = gameObject.AddComponent<AudioSource>();
-        _bgmVolume = _soundVolume = 1;
+        _bgmSource.loop = true;
+        BGMVolume = SoundVolume = 0.75f;
         LoadAll();
     }
 
@@ -77,12 +82,12 @@ public class AudioManager : Singleton<AudioManager>
     /// 背景音乐控制
     /// ----------------------------------------------------------------------------------------------------------------
     
-    public void PlayBGM(string bgmInfo)
+    public AudioSource PlayBGM(string bgmInfo)
     {
         if (_allBGMClips.TryGetValue(bgmInfo, out var clip))
         {
             _bgmSource.clip = clip;
-            _bgmSource.volume = _bgmVolume;
+            _bgmSource.volume = BGMVolume;
             _bgmSource.Play();
         }
         else
@@ -91,22 +96,39 @@ public class AudioManager : Singleton<AudioManager>
             Debug.LogWarning(msg);
             throw new Exception(msg);
         }
-        
+        return _bgmSource;
     }
 
-    public void PauseBGM()
+    public AudioSource PlayBGM(int index)
+    {
+        var clip = _allBGMClips.ElementAt(index).Value;
+        if (clip == null)
+        {
+            var msg = $"音频管理器---》未能通过索引{index}找到对应的背景音乐，无法播放";
+            Debug.LogWarning(msg);
+            throw new Exception(msg);
+        }
+        _bgmSource.clip = clip;
+        _bgmSource.volume = BGMVolume;
+        _bgmSource.Play();
+        return _bgmSource;
+    }
+
+    public AudioSource PauseBGM()
     {
         _bgmSource.Pause();
+        return _bgmSource;
     }
     
-    public void StopBGM()
+    public AudioSource StopBGM()
     {
         _bgmSource.Stop();
+        return _bgmSource;
     }
     
     public void SetBGMVolume(float volume)
     {
-        _bgmSource.volume = _bgmVolume = volume;
+        _bgmSource.volume = BGMVolume = volume;
     }
 
     /// ----------------------------------------------------------------------------------------------------------------
@@ -127,22 +149,22 @@ public class AudioManager : Singleton<AudioManager>
             throw new Exception(msg);
         }
         source.loop = isLoop;
-        source.volume = _soundVolume;
+        source.volume = SoundVolume;
         source.Play();
-        _playingList.Add(soundInfo, source);
+        _playingList.Add(source);
         callback?.Invoke(source);
     }
 
-    public void StopSound(string soundInfo)
+    public void StopSound(AudioSource source)
     {
-        if (_playingList.TryGetValue(soundInfo, out var source)) {
+        if (_playingList.Contains(source)) {
             source.Stop();
             _sourceCache.Push(source);
-            _playingList.Remove(soundInfo);
+            _playingList.Remove(source);
         }
         else
         {
-            var msg = $"音频管理器---》音效{soundInfo}未在播放，无法暂停";
+            var msg = $"音频管理器---》未在播放列表中找到音效{source.name}，无法暂停";
             Debug.LogWarning(msg);
             throw new Exception(msg);
         }
@@ -150,23 +172,24 @@ public class AudioManager : Singleton<AudioManager>
     
     public void SetAllSoundVolume(float volume)
     {
-        _soundVolume = volume;
-        foreach (var (_, value) in _playingList)
+        SoundVolume = volume;
+        foreach (var source in _playingList)
         {
-            value.volume = _soundVolume;
+            source.volume = SoundVolume;
         }
     }
 
     private void PlayingGiveBack()
     {
-        foreach (var source in _playingList)
+        for (var i = 0; i < _playingList.Count; i++)
         {
-            if (source.Value.isPlaying)
+            var source = _playingList[i];
+            if (source.isPlaying)
             {
                 return;
             }
-            _sourceCache.Push(source.Value);
-            _playingList.Remove(source.Key);
+            _sourceCache.Push(source);
+            _playingList.RemoveAt(i);
         }
     }
 

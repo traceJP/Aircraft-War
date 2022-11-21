@@ -23,11 +23,31 @@ namespace Enemy
             protected override void Awake()
             {
                 base.Awake();
+                InitLevel(RoomController.Level);
                 _currentHp = slider.value = maxHp;
                 slider.maxValue = maxHp;
                 slider.minValue = minHp;
             }
-        
+
+            private void InitLevel(Level level)
+            {
+                switch (level)
+                {
+                    case Level.Easy:
+                        maxHp += RoomController.Instance.createBossCount * 200;
+                        break;
+                    case Level.Normal:
+                        maxHp += 1000;
+                        maxHp += RoomController.Instance.createBossCount * 300;
+                        break;
+                    case Level.Hard:
+                        maxHp += 2000;
+                        maxHp += RoomController.Instance.createBossCount * 500;
+                        break;
+                }
+                
+            }
+
             private void FixedUpdate()
             {
                 ShowHpBySlider();
@@ -40,6 +60,8 @@ namespace Enemy
                 {
                     RoomController.Instance.hasBoss = false;
                     VFXManager.Instance.CreateVFX(transform.position, "explosion_enemy");
+                    AudioManager.Instance.PlaySound("effcet_vo_ruo");
+                    AudioManager.Instance.PlaySound("baoz");
                     Score.Instance.UpdateScore(10000);
                     Destroy(gameObject);
                 }

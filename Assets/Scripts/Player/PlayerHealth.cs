@@ -1,4 +1,5 @@
 ﻿using System;
+using Room;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
@@ -23,9 +24,26 @@ public class PlayerHealth : Singleton<PlayerHealth>
     protected override void Awake()
     {
         base.Awake();
+        InitLevel(RoomController.Level);
         _currentHp = slider.value = maxHp;
         slider.maxValue = maxHp;
         slider.minValue = minHp;
+    }
+    
+    private void InitLevel(Level level)
+    {
+        switch (level)
+        {
+            case Level.Easy:
+                maxHp = 200;
+                break;
+            case Level.Normal:
+                maxHp = 120;
+                break;
+            case Level.Hard:
+                maxHp = 80;
+                break;
+        }
     }
 
     private void FixedUpdate()
@@ -44,6 +62,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
         if (_currentHp - value <= minHp)
         {
             VFXManager.Instance.CreateVFX(transform.position, "explosion_player");
+            AudioManager.Instance.PlaySound("gameover");
             DeathEvent?.Invoke();
             Destroy(gameObject);
         }
@@ -59,6 +78,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
+            AudioManager.Instance.PlaySound("Wudi");
             _currentHp = maxHp;
         }
     }

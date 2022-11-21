@@ -15,6 +15,10 @@ namespace UI
         [SerializeField]
         private InputField inputCheckPassword;
 
+        private void Awake()
+        {
+            gameObject.SetActive(false);
+        }
 
         public void RegisterEvent()
         {
@@ -33,8 +37,6 @@ namespace UI
         {
             gameObject.SetActive(status);
         }
-
-
-
+        
     }
 }

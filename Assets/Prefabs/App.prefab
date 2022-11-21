@@ -95,6 +95,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 70d889485ac0f8c44aec748f41eed93b, type: 3}
   - {fileID: 8300000, guid: afd0a71a38de2f24d970a1e3e3e3ce45, type: 3}
   - {fileID: 8300000, guid: 7fdef15748817464c83277e1ec125025, type: 3}
+  - {fileID: 8300000, guid: 14fef84e2e465a44391aed6e32dceec6, type: 3}
+  - {fileID: 8300000, guid: 008936949e8580b4792a1e0e17c10968, type: 3}
+  - {fileID: 8300000, guid: e4fb410c181f1b542b095742d8c66636, type: 3}
+  - {fileID: 8300000, guid: 4cc733785d0c39244924e36231bbaa5d, type: 3}
   bgmList:
   - {fileID: 8300000, guid: 2ae5cf8e31fd16146b48fe503969483a, type: 3}
   - {fileID: 8300000, guid: e0189aa91d4389945915ecf11dd82aa8, type: 3}

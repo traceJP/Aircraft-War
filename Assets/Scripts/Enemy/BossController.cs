@@ -28,6 +28,16 @@ namespace Enemy
             
             Move();
         }
+        
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.tag.Contains(RoomTag.Player))
+            {
+                PlayerHealth.Instance.UpdateHp(-2);
+                BossHealth.Instance.UpdateHp(-10);
+                AudioManager.Instance.PlaySound("xiaobaozai");
+            }
+        }
 
         private void Move()
         {

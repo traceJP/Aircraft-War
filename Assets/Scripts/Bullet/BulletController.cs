@@ -72,6 +72,8 @@ namespace Bullet
             if (other.tag.Contains(RoomTag.Enemy))
             {
                 VFXManager.Instance.CreateVFX(other.transform.position, "explosion_enemy");
+                AudioManager.Instance.PlaySound("effcet_vo_great");
+                AudioManager.Instance.PlaySound("xiaobaozai");
                 Score.Instance.UpdateScore(100);
                 Destroy(gameObject);
                 Destroy(other.gameObject);
@@ -79,6 +81,7 @@ namespace Bullet
 
             if (other.tag.Contains(RoomTag.Boss))
             {
+                AudioManager.Instance.PlaySound("xiaobaozai");
                 BossHealth.Instance.UpdateHp(-10);
                 Destroy(gameObject);
             }
@@ -97,6 +100,7 @@ namespace Bullet
             if (other.tag.Contains(RoomTag.Player))
             {
                 PlayerHealth.Instance.UpdateHp(-10);
+                AudioManager.Instance.PlaySound("xiaobaozai");
                 Destroy(gameObject);
             }
         }
